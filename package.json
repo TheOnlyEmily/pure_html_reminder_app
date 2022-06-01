@@ -1,0 +1,27 @@
+{
+  "name": "pure_html_reminder_app",
+  "version": "1.0.0",
+  "description": "A demonstration of my mastery of vanilla js.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheOnlyEmily/pure_html_reminder_app.git"
+  },
+  "keywords": [
+    "demo",
+    "reminder",
+    "vanilla"
+  ],
+  "author": "Emily Ingram",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheOnlyEmily/pure_html_reminder_app/issues"
+  },
+  "homepage": "https://github.com/TheOnlyEmily/pure_html_reminder_app#readme",
+  "dependencies": {
+    "ramda": "^0.28.0"
+  }
+}
