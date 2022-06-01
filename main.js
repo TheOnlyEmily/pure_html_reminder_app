@@ -9,5 +9,9 @@ function place_reminder(reminder, parent_id) {
     parent.appendChild(reminder);
 }
 
-let reminder = create_reminder("Add more code");
-place_reminder(reminder, "reminder-list");
+function on_reminder_submit(input_id, reminder_parent_id) {
+    let text = document.querySelector(`#${input_id}`).value
+    let reminder = create_reminder(text)
+    place_reminder(reminder, reminder_parent_id)
+}
+
