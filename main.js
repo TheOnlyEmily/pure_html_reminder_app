@@ -4,14 +4,9 @@ function create_reminder(text) {
    return reminder;
 }
 
-function place_reminder(reminder, parent_id) {
-    let parent = document.querySelector(`#${parent_id}`);
+function place_reminder(reminder) {
+    let parent = document.querySelector("#rem-list");
     parent.appendChild(reminder);
 }
 
-function on_reminder_submit(input_id, reminder_parent_id) {
-    let text = document.querySelector(`#${input_id}`).value
-    let reminder = create_reminder(text)
-    place_reminder(reminder, reminder_parent_id)
-}
-
+export {create_reminder, place_reminder};

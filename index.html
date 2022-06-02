@@ -5,15 +5,25 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Reminders</title>
-        <script src="./main.js" defer></script>
+        <script src="./main.js" type="module"></script>
     </head>
     <body>
         <h1>Your Reminders</h1>
-        <ul id="reminder-list"></ul>
-        <form onsubmit="">
+        <ul id="rem-list"></ul>
+        <form>
             <label for="reminder">Enter Reminder:</label>
-            <input type="text" name="reminder" id="rem-text">
+            <input type="text" name="reminder" value="add more code">
             <input type="submit" value="Add Reminder">
         </form>
     </body>
+    <script type="module">
+        import {create_reminder, place_reminder} from "./main.js"
+
+        document.querySelector('[type="submit"]').addEventListener("click", function (event) {
+            event.preventDefault();
+            let inputElement = document.querySelector('[type="text"]');
+            place_reminder(create_reminder(inputElement.value));
+            inputElement.value = "";
+        });
+    </script>
 </html>
