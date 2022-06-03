@@ -17,12 +17,12 @@
         </form>
     </body>
     <script type="module">
-        import {create_reminder, place_reminder} from "./main.js"
-
+        import {create_reminder_element, place_reminder_element} from "./main.js"
+        
         document.querySelector('[type="submit"]').addEventListener("click", function (event) {
             event.preventDefault();
             let inputElement = document.querySelector('[type="text"]');
-            place_reminder(create_reminder(inputElement.value));
+            place_reminder_element(create_reminder_element(inputElement.value));
             inputElement.value = "";
         });
     </script>
