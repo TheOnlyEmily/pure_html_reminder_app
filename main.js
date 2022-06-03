@@ -1,12 +1,13 @@
-function create_reminder(text) {
+function create_reminder_element(text) {
    let reminder = document.createElement("li");
    reminder.textContent = text;
    return reminder;
 }
 
-function place_reminder(reminder) {
+function place_reminder_element(reminder) {
     let parent = document.querySelector("#rem-list");
     parent.appendChild(reminder);
 }
 
-export {create_reminder, place_reminder};
+
+export {place_reminder_element, create_reminder_element};
