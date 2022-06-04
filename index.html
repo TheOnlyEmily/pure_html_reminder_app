@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1>Your Reminders</h1>
-        <ul id="rem-list"></ul>
+        <div id="rem-list"></div>
         <form>
             <label for="reminder">Enter Reminder:</label>
             <input type="text" name="reminder" value="add more code">
@@ -17,13 +17,14 @@
         </form>
     </body>
     <script type="module">
-        import {create_reminder_element, place_reminder_element} from "./main.js"
-        
-        document.querySelector('[type="submit"]').addEventListener("click", function (event) {
-            event.preventDefault();
-            let inputElement = document.querySelector('[type="text"]');
-            place_reminder_element(create_reminder_element(inputElement.value));
-            inputElement.value = "";
-        });
+        import {Reminder, createReminderListHtml} from "./main.js";
+
+        const rList = [
+            new Reminder("Write more code", true),
+            new Reminder("Do the stuff"),
+            new Reminder("Profit")
+        ];
+        const rHtml = createReminderListHtml(rList);
+        document.querySelector("#rem-list").appendChild(rHtml);
     </script>
 </html>
