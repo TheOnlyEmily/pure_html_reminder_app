@@ -20,4 +20,4 @@ function createReminderHtml$({text, complete}) {
     return rem_container;
 }
 
-export {createReminderHtml$}
+export {createReminderHtml$, reminders};
