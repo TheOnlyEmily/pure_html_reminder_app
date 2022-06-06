@@ -11,9 +11,15 @@
         <ul></ul>
     </body>
     <script type="module">
-        import {createReminderHtml$, reminders} from './main.js';
+        import {createReminderHtml$} from './main.js';
 
-        reminderHtml = createReminderHtml$(reminders[0]);
+        const reminders = [
+            {id: 0, text: "Write more code", complete: false},
+            {id: 1, text: "Start project", complete:true},
+            {id: 2, text: "Feed Rusty", complete: false}
+        ];
+
+        const reminderHtml = createReminderHtml$(reminders[0]);
 
         document.querySelector("ul").appendChild(reminderHtml);
     </script>
