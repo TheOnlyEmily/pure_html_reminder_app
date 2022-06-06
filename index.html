@@ -5,26 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Reminders</title>
-        <script src="./main.js" type="module"></script>
     </head>
     <body>
         <h1>Your Reminders</h1>
-        <div id="rem-list"></div>
-        <form>
-            <label for="reminder">Enter Reminder:</label>
-            <input type="text" name="reminder" value="add more code">
-            <input type="submit" value="Add Reminder">
-        </form>
     </body>
-    <script type="module">
-        import {Reminder, createReminderListHtml} from "./main.js";
-
-        const rList = [
-            new Reminder("Write more code", true),
-            new Reminder("Do the stuff"),
-            new Reminder("Profit")
-        ];
-        const rHtml = createReminderListHtml(rList);
-        document.querySelector("#rem-list").appendChild(rHtml);
-    </script>
 </html>

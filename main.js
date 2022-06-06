@@ -13,20 +13,33 @@ class Reminder {
     }
 }
 
+class CompleteBtn {
+    constructor(reminder){
+        this.reminder = reminder;
+        this.html = document.createElement("button");
+        this.html.textContent = this.getTextContent(this.reminder.completed);
+        this.html.addEventListener("click", this.onClick);
+    }
+
+    getTextContent(reminderComplete) {
+        return reminderComplete ? "complete" : "not complete";
+    }
+
+    onClick() {
+        this.reminder.toggleCompleted();
+        this.html.textContent = this.getTextContent(this.reminder.completed);
+    }
+}
+
+
+
 function createReminderHtml(reminder) {
     let reminderHtml = document.createElement("li");
     reminderHtml.textContent = reminder.text;
     reminderHtml.style.color = reminder.completed ? "green" : "red";
-    
-    const completeBtn = document.createElement("button");
-    completeBtn.textContent = reminder.completed ? "complete" : "uncomplete";
-    completeBtn.addEventListener("click", function() {
-        reminder.toggleCompleted();
-        completeBtn.textContent = reminder.completed ? "complete" : "uncomplete";
-        reminderHtml.style.color = reminder.completed ? "green" : "red";
-    });
 
-    reminderHtml.appendChild(completeBtn);
+    const completeBtn = new CompleteBtn(reminder);
+    reminderHtml.appendChild(completeBtn.html);
     return reminderHtml;
 }
 
