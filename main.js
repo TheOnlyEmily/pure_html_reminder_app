@@ -1,17 +1,17 @@
 // $ means this function is not a pure function, use with caution
 
 function createReminderHtml$({text, complete}) {
-    const rem_container = document.createElement("li");
-    const text_container = document.createElement("p");
-    const complete_btn = document.createElement("button");
+    const remContainer = document.createElement("li");
+    const textContainer = document.createElement("p");
+    const completeBtn = document.createElement("button");
 
-    text_container.childText = text;
-    complete_btn.childText = complete ? "check" : "uncheck";
+    textContainer.innerHTML = text;
+    completeBtn.innerHTML = complete ? "check" : "uncheck";
 
-    rem_container.appendChild(text_container);
-    rem_container.appendChild(complete_btn);
+    remContainer.appendChild(textContainer);
+    remContainer.appendChild(completeBtn);
 
-    return rem_container;
+    return remContainer;
 }
 
 export {createReminderHtml$};
