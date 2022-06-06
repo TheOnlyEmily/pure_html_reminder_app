@@ -8,5 +8,13 @@
     </head>
     <body>
         <h1>Your Reminders</h1>
+        <ul></ul>
     </body>
+    <script type="module">
+        import {createReminderHtml$, reminders} from './main.js';
+
+        reminderHtml = createReminderHtml$(reminders[0]);
+
+        document.querySelector("ul").appendChild(reminderHtml);
+    </script>
 </html>
