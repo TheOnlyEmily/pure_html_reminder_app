@@ -5,22 +5,35 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Reminders</title>
+        <script src="./node_modules/ramda/dist/ramda.js"></script>
     </head>
     <body>
         <h1>Your Reminders</h1>
-        <ul></ul>
+        <div></div>
     </body>
     <script type="module">
-        import {createReminderHtml$} from './main.js';
+        import {createReminderHtml, createReminderListHtml, updateComplete} from './main.js';
 
-        const reminders = [
+        var reminders = [
             {id: 0, text: "Write more code", complete: false},
             {id: 1, text: "Start project", complete:true},
             {id: 2, text: "Feed Rusty", complete: false}
         ];
 
-        const reminderHtml = createReminderHtml$(reminders[0]);
+        var reminderListHtml = createReminderListHtml(
+            createReminderHtml,
+            reminders
+        );
 
-        document.querySelector("ul").appendChild(reminderHtml);
+        document.querySelector("div").appendChild(reminderListHtml);
+
+        document.querySelector("div").addEventListener("remcomplete", function (e) {
+            reminders = updateComplete(reminders, e.target.remData);
+            reminderListHtml = createReminderListHtml(
+                createReminderHtml,
+                reminders
+            );
+            document.querySelector("ul").replaceWith(reminderListHtml);
+        });
     </script>
 </html>
