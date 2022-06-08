@@ -2,6 +2,7 @@
 
 const remCompleteEvent = new Event("remcomplete", {bubbles: true});
 const remDeleteEvent = new Event("remdelete", {bubbles: true});
+const remCreateEvent = new Event("remcreate", {bubbles: true});
 
 function createCompleteButton(id, complete) {
     const completeBtn = document.createElement("button");
@@ -55,6 +56,15 @@ function updateComplete(reminders, {id, complete}) {
 
 function deleteReminder(reminders, id) {
     return reminders.filter((rem) => rem.id !== id);
+}
+
+function createReminder(reminders, text, complete=false) {
+    const maxId = reminders.reduce(function(rem1, rem2) {
+        return Math.max(rem1.id, rem2.id);
+    }, {id: -1});
+    const newRem = {id: maxId + 1, text: text, complete: complete};
+    reminders.append(newRem);
+    return reminders;
 }
 
 export {createReminderListHtml, updateComplete, deleteReminder};
