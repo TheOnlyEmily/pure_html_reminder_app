@@ -39,10 +39,10 @@ function createReminderHtml({id, text, complete}) {
     return remContainer;
 }
 
-function createReminderListHtml(remHtmlFunct, reminderData) {
+function createReminderListHtml(reminderData) {
     const remList = document.createElement("ul");
     reminderData.forEach(remObj => {
-        const remHtml = remHtmlFunct(remObj);
+        const remHtml = createReminderHtml(remObj);
         remList.appendChild(remHtml);
     });
     return remList;
@@ -54,4 +54,4 @@ function updateComplete(reminders, {id, complete}) {
     return reminders;
 }
 
-export {createReminderHtml, createReminderListHtml, updateComplete};
+export {createReminderListHtml, updateComplete};
