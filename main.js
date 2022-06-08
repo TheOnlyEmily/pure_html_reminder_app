@@ -27,10 +27,9 @@ function createReminderHtml({id, text, complete}) {
     const remContainer = document.createElement("li");
     const textContainer = document.createElement("p");
     const completeBtn = createCompleteButton(id, complete);
-    const deleteBtn = document.createElement("button");
+    const deleteBtn = createDeleteButton(id);
 
     textContainer.innerHTML = text;
-    deleteBtn.innerHTML = "delete";
     
     remContainer.appendChild(textContainer);
     remContainer.appendChild(completeBtn);
