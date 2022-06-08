@@ -12,7 +12,7 @@
         <div></div>
     </body>
     <script type="module">
-        import {createReminderListHtml, updateComplete} from './main.js';
+        import {createReminderListHtml, updateComplete, deleteReminder} from './main.js';
 
         var reminders = [
             {id: 0, text: "Write more code", complete: false},
@@ -29,5 +29,11 @@
             reminderListHtml = createReminderListHtml(reminders);
             document.querySelector("ul").replaceWith(reminderListHtml);
         });
+
+        document.querySelector("div").addEventListener("remdelete", function (e) {
+            reminders = deleteReminder(reminders, e.target.remData.id);
+            reminderListHtml = createReminderListHtml(reminders);
+            document.querySelector("ul").replaceWith(reminderListHtml);
+        })
     </script>
 </html>

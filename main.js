@@ -53,4 +53,8 @@ function updateComplete(reminders, {id, complete}) {
     return reminders;
 }
 
-export {createReminderListHtml, updateComplete};
+function deleteReminder(reminders, id) {
+    return reminders.filter((rem) => rem.id !== id);
+}
+
+export {createReminderListHtml, updateComplete, deleteReminder};
