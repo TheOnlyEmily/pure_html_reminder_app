@@ -1,5 +1,3 @@
-// $ means this function is not a pure function, use with caution
-
 const remCompleteEvent = new Event("remcomplete", {bubbles: true});
 const remDeleteEvent = new Event("remdelete", {bubbles: true});
 
