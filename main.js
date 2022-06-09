@@ -59,12 +59,19 @@ function deleteReminder(reminders, id) {
 }
 
 function createReminder(reminders, text, complete=false) {
-    const maxId = reminders.reduce(function(rem1, rem2) {
-        return Math.max(rem1.id, rem2.id);
-    }, {id: -1});
+    let maxId = -1;
+    if (reminders.length > 0) {
+        const remIdList = reminders.map((rem) => rem.id);
+        maxId = Math.max(...remIdList);
+    }
     const newRem = {id: maxId + 1, text: text, complete: complete};
-    reminders.append(newRem);
+    reminders.push(newRem);
     return reminders;
 }
 
-export {createReminderListHtml, updateComplete, deleteReminder};
+export {
+    createReminderListHtml, 
+    updateComplete, 
+    deleteReminder, 
+    createReminder
+};

@@ -10,15 +10,18 @@
     <body>
         <h1>Your Reminders</h1>
         <div></div>
+        <form>
+            <input type="text">
+            <input type="submit" value="Add Reminder">
+        </form>
     </body>
     <script type="module">
-        import {createReminderListHtml, updateComplete, deleteReminder} from './main.js';
+        import {createReminderListHtml, updateComplete, deleteReminder, createReminder} from './main.js';
 
-        var reminders = [
-            {id: 0, text: "Write more code", complete: false},
-            {id: 1, text: "Start project", complete:true},
-            {id: 2, text: "Feed Rusty", complete: false}
-        ];
+        let reminders = [];
+        reminders = createReminder(reminders, "Write more code");
+        reminders = createReminder(reminders, "Do the stuff");
+        reminders = createReminder(reminders, "Don't give up");
 
         var reminderListHtml = createReminderListHtml(reminders);
 
