@@ -16,9 +16,9 @@
         </form>
     </body>
     <script type="module">
-        import {createReminderListHtml, toggleComplete, deleteReminder, createReminder} from './main.js';
+        import {createReminderListHtml, ReminderList} from './main.js';
 
-        let reminders = [];
+        const reminders = new ReminderList();
         
         function updateReminderListView(reminders) {
             const reminderListHtml = createReminderListHtml(reminders);
@@ -30,13 +30,13 @@
         }
 
         document.querySelector("div").addEventListener("remcomplete", function (e) {
-            reminders = toggleComplete(reminders, e.target.remData);
-            updateReminderListView(reminders);
+            reminders.toggleComplete(e.target.remData);
+            updateReminderListView(reminders.reminders);
         });
 
         document.querySelector("div").addEventListener("remdelete", function (e) {
-            reminders = deleteReminder(reminders, e.target.remData.id);
-            updateReminderListView(reminders);
+            reminders.deleteReminder(e.target.remData.id);
+            updateReminderListView(reminders.reminders);
         });
 
         document.querySelector("input[value='Add Reminder']").addEventListener("click", function (e) {
@@ -44,8 +44,8 @@
             const newRemText = document.querySelector("input[type='text']").value;
             document.querySelector("input[type='text']").value = '';
             if (newRemText.length > 0) {
-                reminders = createReminder(reminders, newRemText);
-                updateReminderListView(reminders);
+                reminders.createReminder(newRemText);
+                updateReminderListView(reminders.reminders);
             }
         });
     </script>

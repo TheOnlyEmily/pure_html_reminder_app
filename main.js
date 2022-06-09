@@ -48,30 +48,32 @@ function createReminderListHtml(reminderData) {
     return remList;
 }
 
-function toggleComplete(reminders, {id, complete}) {
-    const targetIndex = reminders.findIndex((rem) => rem.id === id);
-    reminders[targetIndex]["complete"] = !complete;
-    return reminders;
-}
-
-function deleteReminder(reminders, id) {
-    return reminders.filter((rem) => rem.id !== id);
-}
-
-function createReminder(reminders, text, complete=false) {
-    let maxId = -1;
-    if (reminders.length > 0) {
-        const remIdList = reminders.map((rem) => rem.id);
-        maxId = Math.max(...remIdList);
+class ReminderList {
+    constructor() {
+        this.reminders = [];
     }
-    const newRem = {id: maxId + 1, text: text, complete: complete};
-    reminders.push(newRem);
-    return reminders;
+
+    toggleComplete({id, complete}) {
+        const targetIndex = this.reminders.findIndex((rem) => rem.id === id);
+        this.reminders[targetIndex]["complete"] = !complete;
+    }
+
+    deleteReminder(id) {
+        this.reminders = this.reminders.filter((rem) => rem.id !== id);
+    }
+
+    createReminder(text, complete=false) {
+        let maxId = -1;
+        if (this.reminders.length > 0) {
+            const remIdList = this.reminders.map((rem) => rem.id);
+            maxId = Math.max(...remIdList);
+        }
+        const newRem = {id: maxId + 1, text: text, complete: complete};
+        this.reminders.push(newRem);
+    }
 }
 
 export {
     createReminderListHtml, 
-    toggleComplete, 
-    deleteReminder, 
-    createReminder
+    ReminderList
 };
