@@ -62,12 +62,7 @@ class ReminderList {
     }
 
     createReminder(text, complete=false) {
-        let maxId = -1;
-        if (this.reminders.length > 0) {
-            const remIdList = this.reminders.map((rem) => rem.id);
-            maxId = Math.max(...remIdList);
-        }
-        const newRem = {id: maxId + 1, text: text, complete: complete};
+        const newRem = {id: this.reminders.length, text: text, complete: complete};
         this.reminders.push(newRem);
     }
 }
