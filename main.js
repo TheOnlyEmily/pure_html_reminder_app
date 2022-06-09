@@ -48,7 +48,7 @@ function createReminderListHtml(reminderData) {
     return remList;
 }
 
-function updateComplete(reminders, {id, complete}) {
+function toggleComplete(reminders, {id, complete}) {
     const targetIndex = reminders.findIndex((rem) => rem.id === id);
     reminders[targetIndex]["complete"] = !complete;
     return reminders;
@@ -71,7 +71,7 @@ function createReminder(reminders, text, complete=false) {
 
 export {
     createReminderListHtml, 
-    updateComplete, 
+    toggleComplete, 
     deleteReminder, 
     createReminder
 };

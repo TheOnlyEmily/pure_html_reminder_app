@@ -16,7 +16,7 @@
         </form>
     </body>
     <script type="module">
-        import {createReminderListHtml, updateComplete, deleteReminder, createReminder} from './main.js';
+        import {createReminderListHtml, toggleComplete, deleteReminder, createReminder} from './main.js';
 
         let reminders = [];
         
@@ -30,7 +30,7 @@
         }
 
         document.querySelector("div").addEventListener("remcomplete", function (e) {
-            reminders = updateComplete(reminders, e.target.remData);
+            reminders = toggleComplete(reminders, e.target.remData);
             updateReminderListView(reminders);
         });
 
