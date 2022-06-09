@@ -4,7 +4,7 @@ const remDeleteEvent = new Event("remdelete", {bubbles: true});
 function createCompleteButton(id, complete) {
     const completeBtn = document.createElement("button");
     completeBtn.innerHTML = complete ? "uncheck" : "check";
-    completeBtn.remData = {id: id, complete: complete};
+    completeBtn.remData = {id: id};
     completeBtn.addEventListener("click", function(e) {
         e.target.dispatchEvent(remCompleteEvent);
     });
@@ -50,9 +50,9 @@ class ReminderList {
         this.reminders = [];
     }
 
-    toggleComplete({id, complete}) {
+    toggleComplete(id) {
         const targetIndex = this.reminders.findIndex((rem) => rem.id === id);
-        this.reminders[targetIndex]["complete"] = !complete;
+        this.reminders[targetIndex]["complete"] = !this.reminders[targetIndex]["complete"];
     }
 
     deleteReminder(id) {

@@ -30,7 +30,7 @@
         }
 
         document.querySelector("div").addEventListener("remcomplete", function (e) {
-            reminders.toggleComplete(e.target.remData);
+            reminders.toggleComplete(e.target.remData.id);
             updateReminderListView(reminders.reminders);
         });
 
