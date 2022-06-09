@@ -6,7 +6,7 @@ const remCreateEvent = new Event("remcreate", {bubbles: true});
 
 function createCompleteButton(id, complete) {
     const completeBtn = document.createElement("button");
-    completeBtn.innerHTML = complete ? "check" : "uncheck";
+    completeBtn.innerHTML = complete ? "uncheck" : "check";
     completeBtn.remData = {id: id, complete: complete};
     completeBtn.addEventListener("click", function(e) {
         e.target.dispatchEvent(remCompleteEvent);
