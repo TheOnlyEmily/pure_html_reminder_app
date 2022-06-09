@@ -19,24 +19,34 @@
         import {createReminderListHtml, updateComplete, deleteReminder, createReminder} from './main.js';
 
         let reminders = [];
-        reminders = createReminder(reminders, "Write more code");
-        reminders = createReminder(reminders, "Do the stuff");
-        reminders = createReminder(reminders, "Don't give up");
-
-        var reminderListHtml = createReminderListHtml(reminders);
-
-        document.querySelector("div").appendChild(reminderListHtml);
+        
+        function updateReminderListView(reminders) {
+            const reminderListHtml = createReminderListHtml(reminders);
+            if (document.querySelector("ul") === null) {
+                const remList = document.createElement("ul");
+                document.querySelector("div").appendChild(remList);
+            }
+            document.querySelector("ul").replaceWith(reminderListHtml);
+        }
 
         document.querySelector("div").addEventListener("remcomplete", function (e) {
             reminders = updateComplete(reminders, e.target.remData);
-            reminderListHtml = createReminderListHtml(reminders);
-            document.querySelector("ul").replaceWith(reminderListHtml);
+            updateReminderListView(reminders);
         });
 
         document.querySelector("div").addEventListener("remdelete", function (e) {
             reminders = deleteReminder(reminders, e.target.remData.id);
-            reminderListHtml = createReminderListHtml(reminders);
-            document.querySelector("ul").replaceWith(reminderListHtml);
-        })
+            updateReminderListView(reminders);
+        });
+
+        document.querySelector("input[value='Add Reminder']").addEventListener("click", function (e) {
+            e.preventDefault();
+            const newRemText = document.querySelector("input[type='text']").value;
+            if (newRemText.length > 0) {
+                document.querySelector("input[type='text']").value = '';
+                reminders = createReminder(reminders, newRemText);
+                updateReminderListView(reminders);
+            }
+        });
     </script>
 </html>
