@@ -2,7 +2,6 @@
 
 const remCompleteEvent = new Event("remcomplete", {bubbles: true});
 const remDeleteEvent = new Event("remdelete", {bubbles: true});
-const remCreateEvent = new Event("remcreate", {bubbles: true});
 
 function createCompleteButton(id, complete) {
     const completeBtn = document.createElement("button");
