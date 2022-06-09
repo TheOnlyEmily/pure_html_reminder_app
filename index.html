@@ -42,8 +42,8 @@
         document.querySelector("input[value='Add Reminder']").addEventListener("click", function (e) {
             e.preventDefault();
             const newRemText = document.querySelector("input[type='text']").value;
+            document.querySelector("input[type='text']").value = '';
             if (newRemText.length > 0) {
-                document.querySelector("input[type='text']").value = '';
                 reminders = createReminder(reminders, newRemText);
                 updateReminderListView(reminders);
             }
