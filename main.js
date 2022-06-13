@@ -1,6 +1,36 @@
 const remCompleteEvent = new Event("remcomplete", {bubbles: true});
 const remDeleteEvent = new Event("remdelete", {bubbles: true});
 
+class RemButtonBuilder {
+    constructor(btnNode=null) {
+        this.btnNode = btnNode;
+    }
+
+    createNewButton() {
+        this.btnNode = document.createElement("button");
+        return this;
+    }
+
+    setButtonText(text) {
+        this.btnNode.innerHTML = text;
+        return this;
+    }
+
+    setButtonRemData(remData) {
+        this.btnNode.remData = remData;
+        return this;
+    }
+
+    setDispatchOnClick(funct) {
+        this.btnNode.addEventListener("click", funct);
+        return this;
+    }
+
+    getRemButton() {
+        return this.btnNode;
+    }
+}
+
 function createCompleteButton(id, complete) {
     const completeBtn = document.createElement("button");
     completeBtn.innerHTML = complete ? "uncheck" : "check";
