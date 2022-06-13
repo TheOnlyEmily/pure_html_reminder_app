@@ -16,37 +16,24 @@
         </form>
     </body>
     <script type="module">
-        import {createReminderListHtml, ReminderList} from './main.js';
+        import {updateReminderListView, ReminderList, ReminderListController} from './main.js';
 
         const reminders = new ReminderList();
         
-        function updateReminderListView(reminders) {
-            const reminderListHtml = createReminderListHtml(reminders);
-            if (document.querySelector("ul") === null) {
-                const remList = document.createElement("ul");
-                document.querySelector("div").appendChild(remList);
-            }
-            document.querySelector("ul").replaceWith(reminderListHtml);
-        }
+       
 
-        document.querySelector("div").addEventListener("remcomplete", function (e) {
-            reminders.toggleComplete(e.target.remData.id);
-            updateReminderListView(reminders.reminders);
-        });
+        const remController = new ReminderListController(updateReminderListView, reminders);
 
-        document.querySelector("div").addEventListener("remdelete", function (e) {
-            reminders.deleteReminder(e.target.remData.id);
-            updateReminderListView(reminders.reminders);
-        });
+        document
+        .querySelector("div")
+        .addEventListener("remcomplete", (e) => remController.handleCompleteToggle(e));
 
-        document.querySelector("input[value='Add Reminder']").addEventListener("click", function (e) {
-            e.preventDefault();
-            const newRemText = document.querySelector("input[type='text']").value;
-            document.querySelector("input[type='text']").value = '';
-            if (newRemText.length > 0) {
-                reminders.createReminder(newRemText);
-                updateReminderListView(reminders.reminders);
-            }
-        });
+        document
+        .querySelector("div")
+        .addEventListener("remdelete", (e) => remController.handleReminderDelete(e));
+
+        document
+        .querySelector("input[value='Add Reminder']")
+        .addEventListener("click", (e) => remController.handleReminderCreate(e));
     </script>
 </html>
