@@ -31,6 +31,38 @@ class RemButtonBuilder {
     }
 }
 
+class RemViewBuilder {
+    constructor() {
+        this.buildList = [];
+    }
+
+    addElement(tag) {
+        this.buildList.push(document.createElement(tag));
+        return this;
+    }
+
+    setElementText(text) {
+        this.buildList[this.buildList.length - 1].innerHTML = text;
+        return this;
+    }
+
+    addNode(node) {
+        this.buildList.push(node);
+        return this;
+    }
+
+    assemble() {
+        const root = this.buildList.shift()
+        this.buildList.forEach((node) => root.appendChild(node));
+        this.buildList = [root];
+        return this;
+    }
+
+    popElement() {
+        return this.buildList.pop();
+    }
+}
+
 function createReminderHtml({id, text, complete}) {
     const btnBuilder = new RemButtonBuilder();
 
