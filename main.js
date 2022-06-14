@@ -106,7 +106,7 @@ class ReminderListController {
         event.preventDefault();
         const newRemText = document.querySelector("input[type='text']").value;
         document.querySelector("input[type='text']").value = '';
-         if (newRemText.length > 0) {
+        if (newRemText.length > 0) {
             this.reminderModel.createReminder(newRemText);
             this.htmlUpdate(this.reminderModel.reminders);
         }
