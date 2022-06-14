@@ -36,7 +36,7 @@ class RemViewBuilder {
         this.buildList = [];
     }
 
-    addNode(tag) {
+    createNode(tag) {
         this.buildList.push(document.createElement(tag));
         return this;
     }
@@ -52,7 +52,7 @@ class RemViewBuilder {
     }
 
     assemble() {
-        const root = this.buildList.shift()
+        const root = this.buildList.shift();
         this.buildList.forEach((node) => root.appendChild(node));
         this.buildList = [root];
         return this;
@@ -65,14 +65,14 @@ class RemViewBuilder {
 
 function createReminderHtml({id, text, complete}) {
     const btnBuilder = new RemButtonBuilder();
+    const viewBuilder = new RemViewBuilder();
 
-    const remContainer = document.createElement("li");
-    const textContainer = document.createElement("p");
     const completeBtn = btnBuilder
         .setButtonText(complete ? "uncheck" : "check")
         .setButtonRemData({id: id})
         .setDispatchOnClick((e) => e.target.dispatchEvent(remCompleteEvent))
         .getRemButton();
+        
     const deleteBtn = btnBuilder
         .createNewButton()
         .setButtonText("delete")
@@ -80,11 +80,14 @@ function createReminderHtml({id, text, complete}) {
         .setDispatchOnClick((e) => e.target.dispatchEvent(remDeleteEvent))
         .getRemButton();
 
-    textContainer.innerHTML = text;
-    
-    remContainer.appendChild(textContainer);
-    remContainer.appendChild(completeBtn);
-    remContainer.appendChild(deleteBtn);
+    const remContainer = viewBuilder
+        .createNode("li")
+        .createNode("p")
+        .setNodeText(text)
+        .pushNode(completeBtn)
+        .pushNode(deleteBtn)
+        .assemble()
+        .popNode();
 
     return remContainer;
 }
