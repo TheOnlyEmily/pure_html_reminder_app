@@ -72,7 +72,7 @@ function createReminderHtml({id, text, complete}) {
         .setButtonRemData({id: id})
         .setDispatchOnClick((e) => e.target.dispatchEvent(remCompleteEvent))
         .getRemButton();
-        
+
     const deleteBtn = btnBuilder
         .createNewButton()
         .setButtonText("delete")
@@ -93,12 +93,13 @@ function createReminderHtml({id, text, complete}) {
 }
 
 function createReminderListHtml(reminderData) {
-    const remList = document.createElement("ul");
+    const viewBuilder = new RemViewBuilder();
+    viewBuilder.createNode("ul");
     reminderData.forEach(remObj => {
-        const remHtml = createReminderHtml(remObj);
-        remList.appendChild(remHtml);
+        viewBuilder.pushNode(createReminderHtml(remObj));
     });
-    return remList;
+    
+    return viewBuilder.assemble().popNode();
 }
 
 class ReminderList {
