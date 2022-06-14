@@ -36,12 +36,12 @@ class RemViewBuilder {
         this.buildList = [];
     }
 
-    addElement(tag) {
+    addNode(tag) {
         this.buildList.push(document.createElement(tag));
         return this;
     }
 
-    setElementText(text) {
+    setNodeText(text) {
         this.buildList[this.buildList.length - 1].innerHTML = text;
         return this;
     }
