@@ -2,8 +2,8 @@ const remCompleteEvent = new Event("remcomplete", {bubbles: true});
 const remDeleteEvent = new Event("remdelete", {bubbles: true});
 
 class RemButtonBuilder {
-    constructor(btnNode=null) {
-        this.btnNode = btnNode;
+    constructor() {
+        this.createNewButton();
     }
 
     createNewButton() {
@@ -31,31 +31,22 @@ class RemButtonBuilder {
     }
 }
 
-function createCompleteButton(id, complete) {
-    const completeBtn = document.createElement("button");
-    completeBtn.innerHTML = complete ? "uncheck" : "check";
-    completeBtn.remData = {id: id};
-    completeBtn.addEventListener("click", function(e) {
-        e.target.dispatchEvent(remCompleteEvent);
-    });
-    return completeBtn;
-}
-
-function createDeleteButton(id) {
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = "delete";
-    deleteBtn.remData = {id: id};
-    deleteBtn.addEventListener("click", function(e) {
-        e.target.dispatchEvent(remDeleteEvent);
-    });
-    return deleteBtn;
-}
-
 function createReminderHtml({id, text, complete}) {
+    const btnBuilder = new RemButtonBuilder();
+
     const remContainer = document.createElement("li");
     const textContainer = document.createElement("p");
-    const completeBtn = createCompleteButton(id, complete);
-    const deleteBtn = createDeleteButton(id);
+    const completeBtn = btnBuilder
+        .setButtonText(complete ? "uncheck" : "check")
+        .setButtonRemData({id: id})
+        .setDispatchOnClick((e) => e.target.dispatchEvent(remCompleteEvent))
+        .getRemButton();
+    const deleteBtn = btnBuilder
+        .createNewButton()
+        .setButtonText("delete")
+        .setButtonRemData({id: id})
+        .setDispatchOnClick((e) => e.target.dispatchEvent(remDeleteEvent))
+        .getRemButton();
 
     textContainer.innerHTML = text;
     
