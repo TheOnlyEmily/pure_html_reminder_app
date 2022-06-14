@@ -46,7 +46,7 @@ class RemViewBuilder {
         return this;
     }
 
-    addNode(node) {
+    pushNode(node) {
         this.buildList.push(node);
         return this;
     }
@@ -58,7 +58,7 @@ class RemViewBuilder {
         return this;
     }
 
-    popElement() {
+    popNode() {
         return this.buildList.pop();
     }
 }
