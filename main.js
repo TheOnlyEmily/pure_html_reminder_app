@@ -1,36 +1,6 @@
 const remCompleteEvent = new Event("remcomplete", {bubbles: true});
 const remDeleteEvent = new Event("remdelete", {bubbles: true});
 
-class RemButtonBuilder {
-    constructor() {
-        this.createNewButton();
-    }
-
-    createNewButton() {
-        this.btnNode = document.createElement("button");
-        return this;
-    }
-
-    setButtonText(text) {
-        this.btnNode.innerHTML = text;
-        return this;
-    }
-
-    setButtonRemData(remData) {
-        this.btnNode.remData = remData;
-        return this;
-    }
-
-    setDispatchOnClick(funct) {
-        this.btnNode.addEventListener("click", funct);
-        return this;
-    }
-
-    getRemButton() {
-        return this.btnNode;
-    }
-}
-
 class RemViewBuilder {
     constructor() {
         this.buildList = [];
@@ -51,6 +21,16 @@ class RemViewBuilder {
         return this;
     }
 
+    setNodeRemData(data) {
+        this.buildList[this.buildList.length - 1].remData = data;
+        return this;
+    }
+
+    setDispatchOnClick(funct) {
+        this.buildList[this.buildList.length - 1].addEventListener("click", funct);
+        return this;
+    }
+
     assemble() {
         const root = this.buildList.shift();
         this.buildList.forEach((node) => root.appendChild(node));
@@ -64,21 +44,21 @@ class RemViewBuilder {
 }
 
 function createReminderHtml({id, text, complete}) {
-    const btnBuilder = new RemButtonBuilder();
     const viewBuilder = new RemViewBuilder();
 
-    const completeBtn = btnBuilder
-        .setButtonText(complete ? "uncheck" : "check")
-        .setButtonRemData({id: id})
+    const completeBtn = viewBuilder
+        .createNode("button")
+        .setNodeText(complete ? "uncheck" : "check")
+        .setNodeRemData({id: id})
         .setDispatchOnClick((e) => e.target.dispatchEvent(remCompleteEvent))
-        .getRemButton();
+        .popNode();
 
-    const deleteBtn = btnBuilder
-        .createNewButton()
-        .setButtonText("delete")
-        .setButtonRemData({id: id})
+    const deleteBtn = viewBuilder
+        .createNode("button")
+        .setNodeText("delete")
+        .setNodeRemData({id: id})
         .setDispatchOnClick((e) => e.target.dispatchEvent(remDeleteEvent))
-        .getRemButton();
+        .popNode();
 
     const remContainer = viewBuilder
         .createNode("li")
