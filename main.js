@@ -12,7 +12,7 @@ class RemViewBuilder {
     }
 
     setNodeText(text) {
-        this.buildList[this.buildList.length - 1].innerHTML = text;
+        this.getCurrentNode().innerHTML = text;
         return this;
     }
 
@@ -22,13 +22,17 @@ class RemViewBuilder {
     }
 
     setNodeRemData(data) {
-        this.buildList[this.buildList.length - 1].remData = data;
+        this.getCurrentNode().remData = data;
         return this;
     }
 
     setDispatchOnClick(funct) {
-        this.buildList[this.buildList.length - 1].addEventListener("click", funct);
+        this.getCurrentNode().addEventListener("click", funct);
         return this;
+    }
+
+    getCurrentNode() {
+        return this.buildList[this.buildList.length - 1];
     }
 
     assemble() {
