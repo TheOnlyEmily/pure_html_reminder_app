@@ -7,7 +7,7 @@ class RemViewBuilder {
     }
 
     createNode(tag) {
-        this.buildList.push(document.createElement(tag));
+        this.pushNode(document.createElement(tag));
         return this;
     }
 
