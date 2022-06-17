@@ -124,8 +124,8 @@ class ReminderListController {
 
     handleReminderCreate(event) {
         event.preventDefault();
-        const newRemText = document.querySelector("input[type='text']").value;
-        document.querySelector("input[type='text']").value = '';
+        const newRemText = document.querySelector("#new-rem-text").value;
+        document.querySelector("#new-rem-text").value = '';
         if (newRemText.length > 0) {
             this.reminderModel.createReminder(newRemText);
             this.htmlUpdate(this.reminderModel.reminders);
@@ -137,7 +137,7 @@ function updateReminderListView(reminders) {
     const reminderListHtml = createReminderListHtml(reminders);
     if (document.querySelector("ul") === null) {
         const remList = document.createElement("ul");
-        document.querySelector("div").appendChild(remList);
+        document.querySelector("#rem-list").appendChild(remList);
     }
     document.querySelector("ul").replaceWith(reminderListHtml);
 }

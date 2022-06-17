@@ -8,10 +8,10 @@
     </head>
     <body>
         <h1>Your Reminders</h1>
-        <div></div>
+        <div id="rem-list"></div>
         <form>
-            <input type="text">
-            <input type="submit" value="Add Reminder">
+            <input type="text" id="new-rem-text">
+            <input type="submit" value="Add Reminder" id="add-rem">
         </form>
     </body>
     <script type="module">
@@ -22,15 +22,15 @@
         const remController = new ReminderListController(updateReminderListView, reminders);
 
         document
-        .querySelector("div")
+        .querySelector("#rem-list")
         .addEventListener("remcomplete", (e) => remController.handleCompleteToggle(e));
 
         document
-        .querySelector("div")
+        .querySelector("#rem-list")
         .addEventListener("remdelete", (e) => remController.handleReminderDelete(e));
 
         document
-        .querySelector("input[value='Add Reminder']")
+        .querySelector("#add-rem")
         .addEventListener("click", (e) => remController.handleReminderCreate(e));
     </script>
 </html>
