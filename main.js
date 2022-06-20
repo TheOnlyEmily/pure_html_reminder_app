@@ -26,8 +26,8 @@ class RemViewBuilder {
         return this;
     }
 
-    setDispatchOnClick(funct) {
-        this.getCurrentNode().addEventListener("click", funct);
+    setDispatchOnClick(event) {
+        this.getCurrentNode().addEventListener("click", (e) => e.target.dispatchEvent(event));
         return this;
     }
 
@@ -54,14 +54,14 @@ function createReminderHtml({id, text, complete}) {
         .createNode("button")
         .setNodeText(complete ? "uncheck" : "check")
         .setNodeRemData({id: id})
-        .setDispatchOnClick((e) => e.target.dispatchEvent(remCompleteEvent))
+        .setDispatchOnClick(remCompleteEvent)
         .popNode();
 
     const deleteBtn = viewBuilder
         .createNode("button")
         .setNodeText("delete")
         .setNodeRemData({id: id})
-        .setDispatchOnClick((e) => e.target.dispatchEvent(remDeleteEvent))
+        .setDispatchOnClick(remDeleteEvent)
         .popNode();
 
     const remContainer = viewBuilder
