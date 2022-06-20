@@ -135,11 +135,12 @@ class ReminderListController {
 
 function updateReminderListView(reminders) {
     const reminderListHtml = createReminderListHtml(reminders);
-    if (document.querySelector("ul") === null) {
-        const remList = document.createElement("ul");
-        document.querySelector("#rem-list").appendChild(remList);
+    const remListSlot = document.querySelector("#rem-list");
+    if (remListSlot.innerHTML === "") {
+        remListSlot.appendChild(reminderListHtml);
+        return;
     }
-    document.querySelector("ul").replaceWith(reminderListHtml);
+    document.querySelector("#rem-list > *").replaceWith(reminderListHtml);
 }
 
 export {
