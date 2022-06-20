@@ -47,7 +47,7 @@ class RemViewBuilder {
     }
 }
 
-function createReminderHtml({id, text, complete}) {
+function createReminderNode({id, text, complete}) {
     const viewBuilder = new RemViewBuilder();
 
     const completeBtn = viewBuilder
@@ -76,11 +76,11 @@ function createReminderHtml({id, text, complete}) {
     return remContainer;
 }
 
-function createReminderListHtml(reminderData) {
+function createReminderListNode(reminderData) {
     const viewBuilder = new RemViewBuilder();
     viewBuilder.createNode("ul");
     reminderData.forEach(remObj => {
-        viewBuilder.pushNode(createReminderHtml(remObj));
+        viewBuilder.pushNode(createReminderNode(remObj));
     });
     
     return viewBuilder.assemble().popNode();
@@ -107,19 +107,19 @@ class ReminderList {
 }
 
 class ReminderListController {
-    constructor(htmlUpdate, reminderModel){
-        this.htmlUpdate = htmlUpdate;
+    constructor(nodeUpdate, reminderModel){
+        this.nodeUpdate = nodeUpdate;
         this.reminderModel = reminderModel;
     }
 
     handleCompleteToggle(event) {
         this.reminderModel.toggleComplete(event.target.remData.id);
-        this.htmlUpdate(this.reminderModel.reminders);
+        this.nodeUpdate(this.reminderModel.reminders);
     }
 
     handleReminderDelete(event) {
         this.reminderModel.deleteReminder(event.target.remData.id);
-        this.htmlUpdate(this.reminderModel.reminders);
+        this.nodeUpdate(this.reminderModel.reminders);
     }
 
     handleReminderCreate(event) {
@@ -128,19 +128,19 @@ class ReminderListController {
         document.querySelector("#new-rem-text").value = '';
         if (newRemText.length > 0) {
             this.reminderModel.createReminder(newRemText);
-            this.htmlUpdate(this.reminderModel.reminders);
+            this.nodeUpdate(this.reminderModel.reminders);
         }
     }
 }
 
 function updateReminderListView(reminders) {
-    const reminderListHtml = createReminderListHtml(reminders);
+    const reminderListNode = createReminderListNode(reminders);
     const remListSlot = document.querySelector("#rem-list");
     if (remListSlot.innerHTML === "") {
-        remListSlot.appendChild(reminderListHtml);
+        remListSlot.appendChild(reminderListNode);
         return;
     }
-    document.querySelector("#rem-list > *").replaceWith(reminderListHtml);
+    document.querySelector("#rem-list > *").replaceWith(reminderListNode);
 }
 
 export {
