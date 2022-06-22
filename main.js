@@ -123,8 +123,7 @@ class ReminderListController {
         this.nodeUpdate(this.reminderModel.reminders);
     }
 
-    handleReminderCreate(event) {
-        event.preventDefault();
+    handleReminderCreate() {
         const newRemText = this.newRemTextGetter.getRemText();
         if (newRemText.length > 0) {
             this.reminderModel.createReminder(newRemText);

@@ -33,6 +33,9 @@
 
         document
         .querySelector("#add-rem")
-        .addEventListener("click", (e) => remController.handleReminderCreate(e));
+        .addEventListener("click", (e) => {
+            e.preventDefault();
+            remController.handleReminderCreate();
+        });
     </script>
 </html>
