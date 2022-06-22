@@ -133,6 +133,18 @@ class ReminderListController {
     }
 }
 
+class FormRemTextGetter {
+    constructor(textInputQuery) {
+        this.remTextInput = document.querySelector(textInputQuery);
+    }
+
+    getRemText() {
+        const remText = this.remTextInput.value;
+        this.getRemText.value = '';
+        return remText;
+    }
+}
+
 function updateReminderListView(reminders) {
     const reminderListNode = createReminderListNode(reminders);
     const remListSlot = document.querySelector("#rem-list");
