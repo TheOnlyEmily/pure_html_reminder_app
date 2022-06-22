@@ -107,9 +107,10 @@ class ReminderList {
 }
 
 class ReminderListController {
-    constructor(nodeUpdate, reminderModel){
+    constructor(nodeUpdate, newRemTextGetter, reminderModel){
         this.nodeUpdate = nodeUpdate;
         this.reminderModel = reminderModel;
+        this.newRemTextGetter = newRemTextGetter;
     }
 
     handleCompleteToggle(event) {
@@ -124,8 +125,7 @@ class ReminderListController {
 
     handleReminderCreate(event) {
         event.preventDefault();
-        const newRemText = document.querySelector("#new-rem-text").value;
-        document.querySelector("#new-rem-text").value = '';
+        const newRemText = this.newRemTextGetter.getRemText();
         if (newRemText.length > 0) {
             this.reminderModel.createReminder(newRemText);
             this.nodeUpdate(this.reminderModel.reminders);
@@ -140,7 +140,7 @@ class FormRemTextGetter {
 
     getRemText() {
         const remText = this.remTextInput.value;
-        this.getRemText.value = '';
+        this.remTextInput.value = '';
         return remText;
     }
 }
@@ -158,5 +158,6 @@ function updateReminderListView(reminders) {
 export {
     updateReminderListView, 
     ReminderList,
-    ReminderListController
+    ReminderListController,
+    FormRemTextGetter
 };

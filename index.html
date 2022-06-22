@@ -15,11 +15,13 @@
         </form>
     </body>
     <script type="module">
-        import {updateReminderListView, ReminderList, ReminderListController} from './main.js';
+        import {updateReminderListView, ReminderList, ReminderListController, FormRemTextGetter} from './main.js';
 
         const reminders = new ReminderList();
 
-        const remController = new ReminderListController(updateReminderListView, reminders);
+        const formTextGet = new FormRemTextGetter("#new-rem-text");
+
+        const remController = new ReminderListController(updateReminderListView, formTextGet, reminders);
 
         document
         .querySelector("#rem-list")
