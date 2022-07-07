@@ -91,6 +91,10 @@ class ReminderList {
         this.reminders = [];
     }
 
+    getReminders() {
+        return this.reminders.map((x) => x);
+    }
+
     toggleComplete(id) {
         const targetIndex = this.reminders.findIndex((rem) => rem.id === id);
         this.reminders[targetIndex]["complete"] = !this.reminders[targetIndex]["complete"];
@@ -115,19 +119,19 @@ class ReminderListController {
 
     handleCompleteToggle(event) {
         this.reminderModel.toggleComplete(event.target.remData.id);
-        this.nodeUpdate(this.reminderModel.reminders);
+        this.nodeUpdate(this.reminderModel.getReminders());
     }
 
     handleReminderDelete(event) {
         this.reminderModel.deleteReminder(event.target.remData.id);
-        this.nodeUpdate(this.reminderModel.reminders);
+        this.nodeUpdate(this.reminderModel.getReminders());
     }
 
     handleReminderCreate() {
         const newRemText = this.newRemTextGetter.getRemText();
         if (newRemText.length > 0) {
             this.reminderModel.createReminder(newRemText);
-            this.nodeUpdate(this.reminderModel.reminders);
+            this.nodeUpdate(this.reminderModel.getReminders());
         }
     }
 }
