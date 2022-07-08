@@ -123,7 +123,7 @@ class ReminderList {
 }
 
 class ReminderListController {
-    constructor(nodeUpdate, newRemTextGetter, reminderModel){
+    constructor(nodeUpdate, newRemTextGetter, reminderModel) {
         this.nodeUpdate = nodeUpdate;
         this.reminderModel = reminderModel;
         this.newRemTextGetter = newRemTextGetter;
