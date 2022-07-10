@@ -27,17 +27,11 @@
 
         const remController = new ReminderListController(updateRemListView, formTextGet, reminders);
 
-        document
-        .querySelector("#rem-list")
-        .addEventListener("remcomplete", (e) => remController.handleCompleteToggle(e));
+        remListSlot.addEventListener("remcomplete", (e) => remController.handleCompleteToggle(e));
 
-        document
-        .querySelector("#rem-list")
-        .addEventListener("remdelete", (e) => remController.handleReminderDelete(e));
+        remListSlot.addEventListener("remdelete", (e) => remController.handleReminderDelete(e));
 
-        document
-        .querySelector("#add-rem")
-        .addEventListener("click", (e) => {
+        remListSlot.addEventListener("click", (e) => {
             e.preventDefault();
             remController.handleReminderCreate();
         });
