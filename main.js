@@ -123,27 +123,27 @@ class ReminderList {
 }
 
 class ReminderListController {
-    constructor(nodeUpdate, newRemTextGetter, reminderModel) {
-        this.nodeUpdate = nodeUpdate;
+    constructor(nodeUpdater, newRemTextGetter, reminderModel) {
+        this.nodeUpdater = nodeUpdater;
         this.reminderModel = reminderModel;
         this.newRemTextGetter = newRemTextGetter;
     }
 
     handleCompleteToggle(event) {
         this.reminderModel.toggleComplete(event.target.remData.id);
-        this.nodeUpdate(this.reminderModel.getReminders());
+        this.nodeUpdater.update(this.reminderModel.getReminders());
     }
 
     handleReminderDelete(event) {
         this.reminderModel.deleteReminder(event.target.remData.id);
-        this.nodeUpdate(this.reminderModel.getReminders());
+        this.nodeUpdater.update(this.reminderModel.getReminders());
     }
 
     handleReminderCreate() {
         const newRemText = this.newRemTextGetter.getRemText();
         if (newRemText.length > 0) {
             this.reminderModel.createReminder(newRemText);
-            this.nodeUpdate(this.reminderModel.getReminders());
+            this.nodeUpdater.update(this.reminderModel.getReminders());
         }
     }
 }
@@ -160,19 +160,22 @@ class FormRemTextGetter {
     }
 }
 
-function updateReminderListView(reminders) {
-    const reminderListNode = createReminderListNode(reminders);
-    const remListSlot = document.querySelector("#rem-list");
-    if (remListSlot.innerHTML === "") {
-        remListSlot.appendChild(reminderListNode);
-        return;
+class RemListViewUpdater {
+    constructor(remListSlot, nodeListCreatFn) {
+        this.remListSlot = remListSlot;
+        this.nodeListCreate = nodeListCreatFn;
     }
-    document.querySelector("#rem-list > *").replaceWith(reminderListNode);
+
+    update(reminders) {
+        const reminderListNode = this.nodeListCreate(reminders);
+        this.remListSlot.replaceChildren(reminderListNode);
+    }
 }
 
 export {
-    updateReminderListView, 
+    RemListViewUpdater, 
     ReminderList,
     ReminderListController,
-    FormRemTextGetter
+    FormRemTextGetter,
+    createReminderListNode
 };
