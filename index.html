@@ -18,6 +18,7 @@
         import {RemListViewUpdater, ReminderList, ReminderListController, FormRemTextGetter, createReminderListNode} from './main.js';
 
         const remListSlot = document.querySelector("#rem-list");
+        const remSubmit = document.querySelector("#add-rem");
 
         const reminders = new ReminderList();
 
@@ -31,7 +32,7 @@
 
         remListSlot.addEventListener("remdelete", (e) => remController.handleReminderDelete(e));
 
-        remListSlot.addEventListener("click", (e) => {
+        remSubmit.addEventListener("click", (e) => {
             e.preventDefault();
             remController.handleReminderCreate();
         });
