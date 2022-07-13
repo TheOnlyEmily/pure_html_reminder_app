@@ -172,10 +172,23 @@ class RemListViewUpdater {
     }
 }
 
-export {
-    RemListViewUpdater, 
-    ReminderList,
-    ReminderListController,
-    FormRemTextGetter,
-    createReminderListNode
-};
+const remListSlot = document.querySelector("#rem-list");
+const remSubmit = document.querySelector("#add-rem");
+const remText = document.querySelector("#new-rem-text");
+
+const reminders = new ReminderList();
+
+const formTextGet = new FormRemTextGetter(remText);
+
+const updateRemListView = new RemListViewUpdater(remListSlot, createReminderListNode);
+
+const remController = new ReminderListController(updateRemListView, formTextGet, reminders);
+
+remListSlot.addEventListener("remcomplete", (e) => remController.handleCompleteToggle(e));
+
+remListSlot.addEventListener("remdelete", (e) => remController.handleReminderDelete(e));
+
+remSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
+    remController.handleReminderCreate();
+});

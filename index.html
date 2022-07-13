@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script defer src="main.js"></script>
         <title>Reminders</title>
     </head>
     <body>
@@ -14,28 +15,4 @@
             <input type="submit" value="Add Reminder" id="add-rem">
         </form>
     </body>
-    <script type="module">
-        import {RemListViewUpdater, ReminderList, ReminderListController, FormRemTextGetter, createReminderListNode} from './main.js';
-
-        const remListSlot = document.querySelector("#rem-list");
-        const remSubmit = document.querySelector("#add-rem");
-        const remText = document.querySelector("#new-rem-text");
-
-        const reminders = new ReminderList();
-
-        const formTextGet = new FormRemTextGetter(remText);
-
-        const updateRemListView = new RemListViewUpdater(remListSlot, createReminderListNode);
-
-        const remController = new ReminderListController(updateRemListView, formTextGet, reminders);
-
-        remListSlot.addEventListener("remcomplete", (e) => remController.handleCompleteToggle(e));
-
-        remListSlot.addEventListener("remdelete", (e) => remController.handleReminderDelete(e));
-
-        remSubmit.addEventListener("click", (e) => {
-            e.preventDefault();
-            remController.handleReminderCreate();
-        });
-    </script>
 </html>
