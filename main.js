@@ -149,8 +149,8 @@ class ReminderListController {
 }
 
 class FormRemTextGetter {
-    constructor(textInputQuery) {
-        this.remTextInput = document.querySelector(textInputQuery);
+    constructor(textInput) {
+        this.remTextInput = textInput;
     }
 
     getRemText() {
