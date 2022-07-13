@@ -1,5 +1,4 @@
-const remCompleteEvent = new Event("remcomplete", {bubbles: true});
-const remDeleteEvent = new Event("remdelete", {bubbles: true});
+import {remCompleteEvent, remDeleteEvent} from "./utils/rem_events.js"
 
 class RemViewBuilder {
     constructor(buildList=[]) {
