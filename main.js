@@ -1,30 +1,7 @@
 import {createReminderListNode} from "./utils/create_reminder_list.js"
 import {ReminderList} from "./utils/rem_model.js"
 import {ReminderListController} from "./utils/rem_controller.js"
-
-class FormRemTextGetter {
-    constructor(textInput) {
-        this.remTextInput = textInput;
-    }
-
-    getRemText() {
-        const remText = this.remTextInput.value;
-        this.remTextInput.value = '';
-        return remText;
-    }
-}
-
-class RemListViewUpdater {
-    constructor(remListSlot, nodeListCreatFn) {
-        this.remListSlot = remListSlot;
-        this.nodeListCreate = nodeListCreatFn;
-    }
-
-    update(reminders) {
-        const reminderListNode = this.nodeListCreate(reminders);
-        this.remListSlot.replaceChildren(reminderListNode);
-    }
-}
+import {FormRemTextGetter, RemListViewUpdater} from "./utils/list_view_managers.js"
 
 const remListSlot = document.querySelector("#rem-list");
 const remSubmit = document.querySelector("#add-rem");
